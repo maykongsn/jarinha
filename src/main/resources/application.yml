@@ -7,6 +7,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:postgresql://localhost:5433/rinha
+    url: jdbc:postgresql://postgres:5432/rinha
     username: postgres
     password: postgres

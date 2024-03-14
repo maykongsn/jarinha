@@ -1,6 +1,30 @@
 version: '3.5'
 
 services:
+  postgres:
+    image: postgres:latest
+    hostname: postgres
+    environment:
+      - PGUSER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=rinha
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: 'postgres -c config_file=/etc/postgresql/postgresql.conf'
+    healthcheck:
+      test: "pg_isready -p 5432"
+      interval: 3s
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '140MB'
+
   api01: &api
     hostname: api01
     build:
@@ -8,7 +32,8 @@ services:
     ports:
       - "8081:8080"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     deploy:
       resources:
         limits:
@@ -36,24 +61,8 @@ services:
           cpus: "0.1"
           memory: "10MB"
 
-  postgres:
-    image: postgres:latest
-    hostname: postgres
-    environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=rinha
-    ports:
-      - "5433:5432"
-    volumes:
-      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf:ro
-      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
-    command: 'postgres -c config_file=/etc/postgresql/postgresql.conf'
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: '140MB'
+volumes:
+  postgres_data:
 
 networks:
   default:
