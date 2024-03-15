@@ -1,0 +1,76 @@
+GET http://localhost:9999/clientes/1/extrato
+
+###
+POST http://localhost:9999/clientes/1/transacoes
+Content-Type: application/json
+
+{
+    "valor": 1000,
+    "tipo": "c",
+    "descricao": "adiciona"
+}
+
+###
+POST http://localhost:9999/clientes/1/transacoes
+Content-Type: application/json
+
+{
+    "valor": 10,
+    "tipo": "d",
+    "descricao": "debita"
+}
+
+###
+GET http://localhost:9999/clientes/1/extrato
+
+###
+POST http://localhost:9999/clientes/1/transacoes
+Content-Type: application/json
+
+{
+    "valor": 1000,
+    "tipo": "x",
+    "descricao": "adiciona"
+}
+
+###
+POST http://localhost:9999/clientes/1/transacoes
+Content-Type: application/json
+
+{
+    "valor": 1000,
+    "tipo": "d",
+    "descricao": "descricao com mais de 10 caracteres"
+}
+
+###
+POST http://localhost:9999/clientes/10/transacoes
+Content-Type: application/json
+
+{
+    "valor": 1000,
+    "tipo": "d",
+    "descricao": "adiciona"
+}
+
+###
+POST http://localhost:9999/clientes/1/transacoes
+Content-Type: application/json
+
+{
+    "valor": null,
+    "tipo": "d",
+    "descricao": "adiciona"
+}
+
+###
+POST http://localhost:9999/clientes/1/transacoes
+Content-Type: application/json
+
+{
+    "valor": 100001,
+    "tipo": "d",
+    "descricao": "debita"
+}
+
+
