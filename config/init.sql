@@ -10,7 +10,7 @@ CREATE TABLE transactions (
     account_id BIGINT NOT NULL,
     amount BIGINT NOT NULL,
     type CHAR NOT NULL,
-    description VARCHAR(10),
+    description VARCHAR(10) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     CONSTRAINT fk_accounts_id_transaction FOREIGN KEY (account_id) REFERENCES accounts(id)
 );
