@@ -21,7 +21,7 @@ public class AccountService {
   private final TransactionRepository transactionRepository;
   private final AccountRepository accountRepository;
 
-  public List<Transaction> statement(Long id) {
+  public List<Transaction> getLastTransactions(Long id) {
     return transactionRepository.findTop10ByAccountIdOrderByCreatedAt(id);
   }
 
