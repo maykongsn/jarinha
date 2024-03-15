@@ -22,7 +22,7 @@ public class AccountService {
   private final AccountRepository accountRepository;
 
   public List<Transaction> getLastTransactions(Long id) {
-    return transactionRepository.findTop10ByAccountIdOrderByCreatedAt(id);
+    return transactionRepository.findTop10ByAccountIdOrderByCreatedAtDesc(id);
   }
 
   @Transactional
